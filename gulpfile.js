@@ -8,6 +8,13 @@ function buildStyles() {
         .src('./src/assets/scss/*.scss')
         .pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
         .pipe(gulp.dest('./dist/css'))
-};
+}
 
-exports.default = buildStyles
+function themes() {
+    return gulp
+        .src('./src/assets/scss/themes/*.scss')
+        .pipe(sass.sync({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(gulp.dest('./dist/css/themes'))
+}
+
+exports.default = gulp.parallel(buildStyles, themes)
